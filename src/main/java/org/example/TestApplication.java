@@ -45,10 +45,10 @@ public class TestApplication extends Application<TestConfiguration> {
                 .register(new EmployeeController(
                         new EmployeeService(
                                 new EmployeeDao())));
-      environment.jersey()
+        environment.jersey()
                 .register(new ProjectController(
                         new ProjectService(new ProjectDao())));
-      environment.jersey()
+        environment.jersey()
                 .register(new ClientController(new ClientService(
                         new ClientDao())));
     }
