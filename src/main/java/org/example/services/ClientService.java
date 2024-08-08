@@ -10,11 +10,14 @@ import java.util.List;
 public class ClientService {
     ClientDao clientDao;
 
-    public ClientService(ClientDao clientDao) {
+    public ClientService(final ClientDao clientDao) {
         this.clientDao = clientDao;
     }
 
     public List<ClientResponse> getAllClients() throws SQLException {
-        return ClientMapper.mapClientListToClientResponseList(clientDao.getAllClients());
+        return ClientMapper
+                .mapClientListToClientResponseList(
+                        clientDao.getAllClients()
+                );
     }
 }

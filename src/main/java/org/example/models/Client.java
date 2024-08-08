@@ -10,8 +10,12 @@ public class Client {
     private Date createDate;
     private int acquiredBy;
 
-    public Client(int id, String name, String address, String phone,
-                  Date createDate, int acquiredBy) {
+    public Client(final int id,
+                  final String name,
+                  final String address,
+                  final String phone,
+                  final Date createDate,
+                  final int acquiredBy) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -25,7 +29,7 @@ public class Client {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
@@ -33,7 +37,7 @@ public class Client {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -41,7 +45,7 @@ public class Client {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(final String address) {
         this.address = address;
     }
 
@@ -49,7 +53,7 @@ public class Client {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(final String phone) {
         this.phone = phone;
     }
 
@@ -57,7 +61,7 @@ public class Client {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(final Date createDate) {
         this.createDate = createDate;
     }
 
@@ -65,7 +69,7 @@ public class Client {
         return acquiredBy;
     }
 
-    public void setAcquiredBy(int acquiredBy) {
+    public void setAcquiredBy(final int acquiredBy) {
         this.acquiredBy = acquiredBy;
     }
 }

@@ -15,7 +15,9 @@ public class ClientDao {
 
         try (Connection connection = DatabaseConnector.getConnection()) {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT id, name, address, phone_number, create_date, acquired_by FROM Client;");
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT id, name, address, phone_number, "
+                            + "create_date, acquired_by FROM Client;");
 
             while (resultSet.next()) {
                 Client client = new Client(

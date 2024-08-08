@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ClientMapper {
-    public static List<ClientResponse> mapClientListToClientResponseList (List<Client> clients) {
+    public static List<ClientResponse>
+    mapClientListToClientResponseList(final List<Client> clients) {
         return clients
                 .stream()
                 .map(client -> new ClientResponse(
