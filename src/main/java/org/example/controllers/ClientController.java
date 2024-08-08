@@ -28,4 +28,15 @@ public class ClientController {
             return Response.serverError().build();
         }
     }
+
+    @GET
+    @Path("/top")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response topClient() {
+        try {
+            return Response.ok().entity(clientService.getTopClient()).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
+    }
 }
