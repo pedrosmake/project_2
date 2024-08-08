@@ -7,7 +7,8 @@ public class ProjectStatusRequest {
     private ProjectStatus projectStatus;
 
     @JsonCreator
-    public ProjectStatusRequest(@JsonProperty("status") ProjectStatus projectStatus) {
+    public ProjectStatusRequest(@JsonProperty("status")
+                                    final ProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
     }
 
@@ -15,7 +16,7 @@ public class ProjectStatusRequest {
         return projectStatus;
     }
 
-    public void setProjectStatus(ProjectStatus projectStatus) {
+    public void setProjectStatus(final ProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
     }
 }

@@ -10,8 +10,12 @@ public class Project {
     private int clientId;
     private int techleadId;
 
-    public Project(int id, String name, double value, ProjectStatus status,
-                   int clientId, int techleadId) {
+    public Project(final int id,
+                   final String name,
+                   final double value,
+                   final ProjectStatus status,
+                   final int clientId,
+                   final int techleadId) {
         this.id = id;
         this.name = name;
         this.value = value;

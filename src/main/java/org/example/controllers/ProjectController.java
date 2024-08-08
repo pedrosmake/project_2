@@ -2,7 +2,6 @@ package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import org.example.models.ProjectRequest;
-import org.example.models.ProjectStatus;
 import org.example.models.ProjectStatusRequest;
 import org.example.services.ProjectService;
 
@@ -20,33 +19,35 @@ import java.sql.SQLException;
 public class ProjectController {
     ProjectService projectService;
 
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(final ProjectService projectService) {
         this.projectService = projectService;
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createProject(ProjectRequest projectRequest){
-        try{
+    public Response createProject(final ProjectRequest projectRequest) {
+        try {
             return Response
                     .status(Response.Status.CREATED)
                     .entity(projectService.createProject(projectRequest))
                     .build();
 
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             return Response.serverError().build();
 
         }
 //        catch (InvalidException e) {
-//            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+//            return Response.status(Response.Status.BAD_REQUEST)
+//            .entity(e.getMessage()).build();
 //        }
     }
 
     @PUT
     @Path("/{id}/change-status")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateProject(@PathParam("id") int id, ProjectStatusRequest status) {
+    public Response updateProject(final @PathParam("id") int id,
+                                  final ProjectStatusRequest status) {
         try {
             projectService.setStatus(id, status);
             return Response.noContent().build();

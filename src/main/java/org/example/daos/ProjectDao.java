@@ -11,8 +11,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ProjectDao {
-    public Project getProjectByID(int id) throws SQLException {
-        try(Connection connection = DatabaseConnector.getConnection()) {
+
+    public static final Integer ID_1 = 1;
+    public static final Integer ID_2 = 2;
+    public static final Integer ID_3 = 3;
+    public static final Integer ID_4 = 4;
+    public static final Integer ID_5 = 5;
+
+    public Project getProjectByID(final int id) throws SQLException {
+        try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "SELECT * FROM Project WHERE id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -20,7 +27,7 @@ public class ProjectDao {
 
             ResultSet resultSet = statement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 return new Project(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -34,18 +41,23 @@ public class ProjectDao {
         return null;
     }
 
-    public int createProject(final ProjectRequest projectRequest) throws SQLException {
+    public int createProject(final ProjectRequest projectRequest)
+            throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
-        String insertStatement = "INSERT INTO Project (name, value, status, client_id, techlead_id) VALUES (?,?,?,?,?)";
+        String insertStatement =
+                "INSERT INTO Project "
+                + "(name, value, status, client_id, techlead_id)"
+                + " VALUES (?,?,?,?,?)";
 
-        PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement st = c.prepareStatement(insertStatement,
+                Statement.RETURN_GENERATED_KEYS);
 
-        st.setString(1, projectRequest.getName());
-        st.setDouble(2, projectRequest.getValue());
-        st.setString(3, projectRequest.getStatus().toString());
-        st.setInt(4, projectRequest.getClientId());
-        st.setInt(5, projectRequest.getTechleadId());
+        st.setString(ID_1, projectRequest.getName());
+        st.setDouble(ID_2, projectRequest.getValue());
+        st.setString(ID_3, projectRequest.getStatus().toString());
+        st.setInt(ID_4, projectRequest.getClientId());
+        st.setInt(ID_5, projectRequest.getTechleadId());
 
         st.executeUpdate();
 
@@ -57,7 +69,7 @@ public class ProjectDao {
         return -1;
     }
 
-    public void updateProject(int id, ProjectStatus status)
+    public void updateProject(final int id, final ProjectStatus status)
             throws SQLException {
         Connection c = DatabaseConnector.getConnection();
 
