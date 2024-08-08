@@ -1,5 +1,8 @@
 package org.example.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Date;
 
 public class ClientRequest {
@@ -9,11 +12,12 @@ public class ClientRequest {
     private Date createDate;
     private int acquiredBy;
 
-    public ClientRequest(final String name,
-                         final String address,
-                         final String phone,
-                         final Date createDate,
-                         final int acquiredBy) {
+    @JsonCreator
+    public ClientRequest(@JsonProperty("name") final String name,
+                         @JsonProperty("address") final String address,
+                         @JsonProperty("phone") final String phone,
+                         @JsonProperty("createDate") final Date createDate,
+                         @JsonProperty("acquiredBy") final int acquiredBy) {
         this.name = name;
         this.address = address;
         this.phone = phone;
