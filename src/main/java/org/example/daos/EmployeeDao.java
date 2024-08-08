@@ -1,0 +1,31 @@
+package org.example.daos;
+
+import org.example.models.EmployeeRequest;
+
+import java.sql.*;
+
+public class EmployeeDao {
+    public int createProduct(EmployeeRequest employeeRequest) throws SQLException {
+        try(Connection connection = DatabaseConnector.getConnection()){
+            String query = "INSERT INTO Employee (name, salary, bank_account_number,national_insurance_number) VALUES (?,?,?,?);";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, employeeRequest.getName());
+            preparedStatement.setDouble(2, employeeRequest.getSalary());
+            preparedStatement.setString(3, employeeRequest.getBankAccount());
+            preparedStatement.setString(4, employeeRequest.getInsuranceNumber());
+
+
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            if(resultSet.next()){
+                return resultSet.getInt(1);
+            }
+
+            return -1;
+        }
+    }
+}
