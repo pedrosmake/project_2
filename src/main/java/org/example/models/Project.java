@@ -6,22 +6,31 @@ public class Project {
     private double value;
     private ProjectStatus status;
 
-    // do zmiany na obiekty
-    private int clientId;
-    private int techleadId;
+    private Client client;
+    private Employee techlead;
 
     public Project(final int id,
                    final String name,
                    final double value,
                    final ProjectStatus status,
-                   final int clientId,
-                   final int techleadId) {
+                   final Client client,
+                   final Employee techlead) {
         this.id = id;
         this.name = name;
         this.value = value;
         this.status = status;
-        this.clientId = clientId;
-        this.techleadId = techleadId;
+        this.client = client;
+        this.techlead = techlead;
+    }
+
+    public Project(final int id,
+                   final String name,
+                   final double value,
+                   final ProjectStatus status) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
+        this.status = status;
     }
 
     public int getId() {
@@ -56,19 +65,19 @@ public class Project {
         this.status = status;
     }
 
-    public int getClientId() {
-        return clientId;
+    public Client getClient() {
+        return client;
     }
 
-    public void setClientId(final int clientId) {
-        this.clientId = clientId;
+    public void setClient(final Client client) {
+        this.client = client;
     }
 
-    public int getTechleadId() {
-        return techleadId;
+    public Employee getTechlead() {
+        return techlead;
     }
 
-    public void setTechleadId(final int techleadId) {
-        this.techleadId = techleadId;
+    public void setTechlead(final Employee techlead) {
+        this.techlead = techlead;
     }
 }
