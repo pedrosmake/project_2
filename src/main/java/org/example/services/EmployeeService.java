@@ -30,4 +30,8 @@ public class EmployeeService {
     public List<EmployeeResponse> getAllEmployees() throws SQLException {
         return  employeeDao.getAllEmployees();
     }
+
+    public Object getAllSalesEmployees() throws SQLException {
+        return  employeeDao.getAllSalesEmployees();
+    }
 }

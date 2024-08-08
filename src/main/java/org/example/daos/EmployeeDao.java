@@ -3,6 +3,7 @@ package org.example.daos;
 import org.example.models.EmployeeRequest;
 import org.example.models.EmployeeResponse;
 import org.example.models.SalesEmployeeRequest;
+import org.example.models.SalesEmployeeResponse;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -67,6 +68,32 @@ public class EmployeeDao {
                         resultSet.getDouble("salary"),
                         resultSet.getString("bank_account_number"),
                         resultSet.getString("national_insurance_number")
+                );
+
+                employees.add(employeeResponse);
+            }
+
+        }
+        return employees;
+    }
+
+    public List<SalesEmployeeResponse> getAllSalesEmployees() throws SQLException {
+        List<SalesEmployeeResponse> employees = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT * FROM `Employee` JOIN `Commission_Rate` USING(id);"
+            );
+
+            while (resultSet.next()) {
+                SalesEmployeeResponse employeeResponse = new SalesEmployeeResponse(
+                        resultSet.getString("name"),
+                        resultSet.getDouble("salary"),
+                        resultSet.getString("bank_account_number"),
+                        resultSet.getString("national_insurance_number"),
+                        resultSet.getDouble("value")
                 );
 
                 employees.add(employeeResponse);

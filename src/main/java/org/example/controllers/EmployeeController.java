@@ -48,10 +48,22 @@ public class EmployeeController {
     }
 
     @GET
+    @Path("/delivery")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllEmployees(){
         try {
             return Response.ok().entity(employeeService.getAllEmployees()).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Path("/sales")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllSalesEmployees(){
+        try {
+            return Response.ok().entity(employeeService.getAllSalesEmployees()).build();
         } catch (SQLException e) {
             return Response.serverError().build();
         }
