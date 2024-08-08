@@ -1,5 +1,7 @@
 package org.example.daos;
 
+import org.example.exceptions.Entity;
+import org.example.exceptions.FailedToCreateException;
 import org.example.models.EmployeeRequest;
 import org.example.models.EmployeeResponse;
 import org.example.models.SalesEmployeeRequest;
@@ -17,7 +19,7 @@ import java.util.List;
 public class EmployeeDao {
     public static final Integer ID_3 = 3;
     public static final Integer ID_4 = 4;
-    public int createProduct(
+    public int createEmployee(
             final EmployeeRequest employeeRequest) throws SQLException {
         try (Connection connection = DatabaseConnector.getConnection()) {
             String query = "INSERT INTO Employee"
@@ -52,9 +54,10 @@ public class EmployeeDao {
         }
     }
 
-    public int createProduct(
-            final SalesEmployeeRequest employeeRequest) throws SQLException {
-        int id = createProduct((EmployeeRequest) employeeRequest);
+    public int createEmployee(
+            final SalesEmployeeRequest employeeRequest)
+            throws SQLException, FailedToCreateException {
+        int id = createEmployee((EmployeeRequest) employeeRequest);
 
         if (id != -1) {
             try (Connection connection = DatabaseConnector.getConnection()) {
@@ -70,8 +73,9 @@ public class EmployeeDao {
 
                 preparedStatement.executeUpdate();
             }
+        } else {
+            throw new FailedToCreateException(Entity.EMPLOYEE);
         }
-
         return id;
     }
 
