@@ -30,10 +30,21 @@ public class ProjectService {
             throws SQLException {
         Project projectToUpdate = projectDao.getProjectByID(id);
 
+//        do zrobienia
 //        if(projectToUpdate == null) {
-//            throw new DoesNotExistException(Entity.PRODUCT);
+//            throw new DoesNotExistException();
 //        }
 
         projectDao.updateProject(id, status.getProjectStatus());
+    }
+
+    public void removeEmployee(final int projectID, final int employeeID)
+            throws SQLException {
+        Project projectToRemove = projectDao.getProjectByID(projectID);
+//        if (projectToRemove == null) {
+//            throw new DoesNotExistException(Entity.PRODUCT);
+//        }
+
+        projectDao.removeEmployee(employeeID, projectID);
     }
 }

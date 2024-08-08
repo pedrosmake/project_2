@@ -33,7 +33,6 @@ public class ProjectController {
                     .build();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
             return Response.serverError().build();
 
         }
@@ -52,6 +51,20 @@ public class ProjectController {
             projectService.setStatus(id, status);
             return Response.noContent().build();
         }  catch (SQLException e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @PUT
+    @Path("/{projectID}/remove-employee/{employeeID}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response removeEmployee(
+            final @PathParam("projectID") int projectID,
+            final @PathParam("employeeID") int employeeID) {
+        try {
+            projectService.removeEmployee(projectID, employeeID);
+            return Response.noContent().build();
+        } catch (SQLException e) {
             return Response.serverError().build();
         }
     }

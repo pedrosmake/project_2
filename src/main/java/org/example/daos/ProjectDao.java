@@ -5,10 +5,12 @@ import org.example.models.ProjectRequest;
 import org.example.models.ProjectStatus;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class ProjectDao {
 
@@ -79,6 +81,22 @@ public class ProjectDao {
 
         st.setString(1, String.valueOf(status));
         st.setInt(2, id);
+
+        st.executeUpdate();
+    }
+
+    public void removeEmployee(final int employeeID, final int projectID)
+            throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+
+        String updateEndDate = "UPDATE Project_Employee SET"
+                + " end_date = ? WHERE employee_id = ? AND project_id = ?";
+
+        PreparedStatement st = c.prepareStatement(updateEndDate);
+
+        st.setDate(ID_1, Date.valueOf(LocalDate.now()));
+        st.setInt(ID_2, employeeID);
+        st.setInt(ID_3, projectID);
 
         st.executeUpdate();
     }
