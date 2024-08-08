@@ -1,8 +1,11 @@
 package org.example.daos;
 
 import org.example.models.EmployeeRequest;
+import org.example.models.EmployeeResponse;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeeDao {
     public int createProduct(EmployeeRequest employeeRequest) throws SQLException {
@@ -27,5 +30,30 @@ public class EmployeeDao {
 
             return -1;
         }
+    }
+
+    public List<EmployeeResponse> getAllEmployees() throws SQLException {
+        List<EmployeeResponse> employees = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT * FROM `Employee`;"
+            );
+
+            while (resultSet.next()) {
+                EmployeeResponse employeeResponse = new EmployeeResponse(
+                        resultSet.getString("name"),
+                        resultSet.getDouble("salary"),
+                        resultSet.getString("bank_account_number"),
+                        resultSet.getString("national_insurance_number")
+                );
+
+                employees.add(employeeResponse);
+            }
+
+        }
+        return employees;
     }
 }

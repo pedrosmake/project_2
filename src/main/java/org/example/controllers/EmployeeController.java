@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import org.example.models.EmployeeRequest;
 import org.example.services.EmployeeService;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -27,6 +28,16 @@ public class EmployeeController {
 
         try {
             return Response.ok().entity(employeeService.createEmployee(employeeRequest)).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllEmployees(){
+        try {
+            return Response.ok().entity(employeeService.getAllEmployees()).build();
         } catch (SQLException e) {
             return Response.serverError().build();
         }
