@@ -1,6 +1,8 @@
 package org.example.controllers;
 
 import io.swagger.annotations.Api;
+import org.example.exceptions.FailedToCreateException;
+import org.example.exceptions.InvalidException;
 import org.example.models.EmployeeRequest;
 import org.example.models.SalesEmployeeRequest;
 import org.example.services.EmployeeService;
@@ -35,6 +37,9 @@ public class EmployeeController {
                             createEmployee(employeeRequest)).build();
         } catch (SQLException e) {
             return Response.serverError().build();
+        } catch (InvalidException e) {
+            return Response.status(Response.Status.BAD_REQUEST).
+                    entity(e.getMessage()).build();
         }
     }
 
@@ -48,8 +53,11 @@ public class EmployeeController {
             return Response.ok().
                     entity(employeeService.
                             createEmployee(salesEmployeeRequest)).build();
-        } catch (SQLException e) {
+        } catch (SQLException | FailedToCreateException e) {
             return Response.serverError().build();
+        } catch (InvalidException e) {
+            return Response.status(Response.Status.BAD_REQUEST).
+                    entity(e.getMessage()).build();
         }
     }
 
