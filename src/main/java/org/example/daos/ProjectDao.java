@@ -1,5 +1,6 @@
 package org.example.daos;
 
+import org.example.models.Employee;
 import org.example.models.Project;
 import org.example.models.ProjectRequest;
 import org.example.models.ProjectStatus;
@@ -11,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.List;
 
 public class ProjectDao {
 
@@ -34,9 +36,7 @@ public class ProjectDao {
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getDouble("value"),
-                        ProjectStatus.valueOf(resultSet.getString("status")),
-                        resultSet.getInt("client_id"),
-                        resultSet.getInt("techlead_id")
+                        ProjectStatus.valueOf(resultSet.getString("status"))
                 );
             }
         }
@@ -99,5 +99,26 @@ public class ProjectDao {
         st.setInt(ID_3, projectID);
 
         st.executeUpdate();
+    }
+
+    public void addEmplyee(final List<Employee> employeeList,
+                           final int projectID) throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+
+        for (Employee employee : employeeList) {
+            String updateEmployeeList =
+                    "INSERT INTO Project_Employee "
+                    + "(project_id, employee_id, start_date)"
+                    + " VALUES (?, ?, ?)";
+
+            PreparedStatement st = c.prepareStatement(updateEmployeeList);
+
+            st.setInt(ID_1, projectID);
+            st.setInt(ID_2, employee.getId());
+            st.setDate(ID_3, Date.valueOf(LocalDate.now()));
+
+            st.executeUpdate();
+        }
+
     }
 }
