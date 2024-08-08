@@ -10,6 +10,16 @@ public class Project {
     private int clientId;
     private int techleadId;
 
+    public Project(int id, String name, double value, ProjectStatus status,
+                   int clientId, int techleadId) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
+        this.status = status;
+        this.clientId = clientId;
+        this.techleadId = techleadId;
+    }
+
     public int getId() {
         return id;
     }
