@@ -16,8 +16,8 @@ public class ProjectRequest {
     public ProjectRequest(@JsonProperty("name") final String name,
                           @JsonProperty("value") final double value,
                           @JsonProperty("status") final ProjectStatus status,
-                          @JsonProperty("client") final int clientId,
-                          @JsonProperty("techlead") final int techleadId) {
+                          @JsonProperty("clientId") final int clientId,
+                          @JsonProperty("techleadId") final int techleadId) {
         this.name = name;
         this.value = value;
         this.status = status;
