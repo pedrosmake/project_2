@@ -6,7 +6,12 @@ import org.example.models.ClientResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ClientMapper {
+public final class ClientMapper {
+    private ClientMapper() {
+        throw new UnsupportedOperationException(
+                "This is a utility class and cannot be instantiated");
+    }
+
     public static List<ClientResponse>
     mapClientListToClientResponseList(final List<Client> clients) {
         return clients
