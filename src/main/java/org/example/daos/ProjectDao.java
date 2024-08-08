@@ -79,8 +79,8 @@ public class ProjectDao {
 
         PreparedStatement st = c.prepareStatement(updateStatement);
 
-        st.setString(1, String.valueOf(status));
-        st.setInt(2, id);
+        st.setString(ID_1, String.valueOf(status));
+        st.setInt(ID_2, id);
 
         st.executeUpdate();
     }
