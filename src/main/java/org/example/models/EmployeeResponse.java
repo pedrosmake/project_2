@@ -1,7 +1,5 @@
 package org.example.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EmployeeResponse {
     private String name;
@@ -9,10 +7,10 @@ public class EmployeeResponse {
     private String bankAccount;
     private String insuranceNumber;
 
-    public EmployeeResponse(String name,
-                            double salary,
-                            String bankAccount,
-                            String insuranceNumber) {
+    public EmployeeResponse(final String name,
+                            final double salary,
+                            final String bankAccount,
+                            final String insuranceNumber) {
         this.name = name;
         this.salary = salary;
         this.bankAccount = bankAccount;
@@ -23,7 +21,7 @@ public class EmployeeResponse {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -31,7 +29,7 @@ public class EmployeeResponse {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(final double salary) {
         this.salary = salary;
     }
 
@@ -39,7 +37,7 @@ public class EmployeeResponse {
         return bankAccount;
     }
 
-    public void setBankAccount(String bankAccount) {
+    public void setBankAccount(final String bankAccount) {
         this.bankAccount = bankAccount;
     }
 
@@ -47,7 +45,7 @@ public class EmployeeResponse {
         return insuranceNumber;
     }
 
-    public void setInsuranceNumber(String insuranceNumber) {
+    public void setInsuranceNumber(final String insuranceNumber) {
         this.insuranceNumber = insuranceNumber;
     }
 }

@@ -3,15 +3,18 @@ package org.example.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SalesEmployeeRequest extends EmployeeRequest{
+public class SalesEmployeeRequest extends EmployeeRequest {
     private double commissionRate;
 
     @JsonCreator
-    public SalesEmployeeRequest(@JsonProperty("name") String name,
-                                @JsonProperty("salary") double salary,
-                                @JsonProperty("bankAccount") String bankAccount,
-                                @JsonProperty("insuranceNumber") String insuranceNumber,
-                                @JsonProperty("commissionRate") double commissionRate) {
+    public SalesEmployeeRequest(final @JsonProperty("name") String name,
+                                final @JsonProperty("salary") double salary,
+                                final @JsonProperty("bankAccount")
+                                    String bankAccount,
+                                final @JsonProperty("insuranceNumber")
+                                    String insuranceNumber,
+                                final @JsonProperty("commissionRate")
+                                    double commissionRate) {
         super(name, salary, bankAccount, insuranceNumber);
         this.commissionRate = commissionRate;
     }
@@ -20,7 +23,7 @@ public class SalesEmployeeRequest extends EmployeeRequest{
         return commissionRate;
     }
 
-    public void setCommissionRate(double commissionRate) {
+    public void setCommissionRate(final double commissionRate) {
         this.commissionRate = commissionRate;
     }
 }

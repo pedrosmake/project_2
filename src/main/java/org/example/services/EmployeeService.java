@@ -12,16 +12,18 @@ public class EmployeeService {
 
     EmployeeDao employeeDao;
 
-    public EmployeeService(EmployeeDao employeeDao) {
+    public EmployeeService(final EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;
     }
 
-    public int createEmployee(EmployeeRequest employeeRequest) throws SQLException {
+    public int createEmployee(final EmployeeRequest employeeRequest)
+            throws SQLException {
         return employeeDao.createProduct(employeeRequest);
 
     }
 
-    public int createEmployee(SalesEmployeeRequest employeeRequest) throws SQLException {
+    public int createEmployee(final SalesEmployeeRequest employeeRequest)
+            throws SQLException {
         return employeeDao.createProduct(employeeRequest);
 
 
