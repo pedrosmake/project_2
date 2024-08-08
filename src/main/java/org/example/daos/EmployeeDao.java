@@ -2,6 +2,7 @@ package org.example.daos;
 
 import org.example.models.EmployeeRequest;
 import org.example.models.EmployeeResponse;
+import org.example.models.SalesEmployeeRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,6 +31,24 @@ public class EmployeeDao {
 
             return -1;
         }
+    }
+
+    public int createProduct(SalesEmployeeRequest employeeRequest) throws SQLException {
+        int id = createProduct((EmployeeRequest) employeeRequest);
+
+        if(id != -1){
+            try (Connection connection = DatabaseConnector.getConnection()) {
+                String query = "INSERT INTO Commission_Rate (id,value) VALUES (?,?);";
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+                preparedStatement.setInt(1,id);
+                preparedStatement.setDouble(2,employeeRequest.getCommissionRate());
+
+                preparedStatement.executeUpdate();
+            }
+        }
+
+        return id;
     }
 
     public List<EmployeeResponse> getAllEmployees() throws SQLException {

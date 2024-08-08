@@ -2,6 +2,7 @@ package org.example.controllers;
 
 import io.swagger.annotations.Api;
 import org.example.models.EmployeeRequest;
+import org.example.models.SalesEmployeeRequest;
 import org.example.services.EmployeeService;
 
 import javax.ws.rs.GET;
@@ -23,11 +24,24 @@ public class EmployeeController {
     }
 
     @POST
+    @Path("/delivery")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createEmployee(EmployeeRequest employeeRequest){
+    public Response createDeliveryEmployee(EmployeeRequest employeeRequest){
 
         try {
             return Response.ok().entity(employeeService.createEmployee(employeeRequest)).build();
+        } catch (SQLException e) {
+            return Response.serverError().build();
+        }
+    }
+
+    @POST
+    @Path("/sales")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createSalesEmployee(SalesEmployeeRequest salesEmployeeRequest){
+
+        try {
+            return Response.ok().entity(employeeService.createEmployee(salesEmployeeRequest)).build();
         } catch (SQLException e) {
             return Response.serverError().build();
         }
